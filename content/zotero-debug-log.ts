@@ -53,7 +53,7 @@ class DebugLog { // tslint:disable-line:variable-name
 
       const blob = new Blob([tape.out], { type: 'application/x-tar'})
       const formData = new FormData()
-      formData.append('file', blob)
+      formData.append('file', blob, 'log.tar')
 
       const response = await this.post('https://file.io', formData)
       alert(response.key)
