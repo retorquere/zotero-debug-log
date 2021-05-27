@@ -35,31 +35,37 @@ class DebugLog { // tslint:disable-line:variable-name
     debug('started')
   }
 
+  private alert(title, body) {
+    const ps = Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService)
+    ps.alert(null, title, body)
+  }
+
   public async send() {
     await Zotero.Schema.schemaUpdatePromise
 
     try {
       const tape = new Tar()
+      const key = Zotero.Utilities.generateObjectKey()
 
       const log = [
         await this.info(),
         Zotero.getErrors(true).join('\n\n'),
         Zotero.Debug.getConsoleViewerOutput().join('\n'),
       ].filter((txt: string) => txt).join('\n\n').trim()
-      if (log) tape.append('log.txt', log)
+      if (log) tape.append(`${key}/${key}.txt`, log)
 
       const rdf = await this.rdf()
-      if (rdf) tape.append('selected.rdf', rdf)
+      if (rdf) tape.append(`${key}/${key}.rdf`, rdf)
 
       const blob = new Blob([tape.out], { type: 'application/x-tar'})
       const formData = new FormData()
-      formData.append('file', blob, 'log.tar')
+      formData.append('file', blob, `${Zotero.Utilities.generateObjectKey()}.tar`)
 
       const response = await this.post('https://file.io', formData)
-      alert(response.key)
+      this.alert('Debug log ID', response.key)
     }
     catch (err) {
-      alert(`debuglog: ${err.message}`)
+      this.alert('Debug log submission error', err.message)
     }
   }
 
