@@ -1,0 +1,46 @@
+{
+  "name": "zotero-debug-log",
+  "version": "0.0.1",
+  "description": "Post a Zotero debug log",
+  "scripts": {
+    "lint": "eslint . --ext .ts --cache --cache-location .eslintcache/",
+    "build": "parallel --ungroup ::: 'npm run lint' 'node esbuild.js' 'tsc --noEmit'",
+    "postbuild": "zotero-plugin-zipup build zotero-debug-log",
+    "release": "zotero-plugin-release",
+    "postversion": "git push --follow-tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/retorquere/zotero-debug-log.git"
+  },
+  "author": {
+    "name": "Emiliano Heyns",
+    "email": "emiliano.heyns@iris-advies.com"
+  },
+  "bugs": {
+    "url": "https://github.com/retorquere/zotero-debug-log/issues"
+  },
+  "homepage": "https://github.com/retorquere/zotero-debug-log",
+  "dependencies": {
+    "@types/mocha": "^8.2.2",
+    "@types/tar-js": "^0.3.0",
+    "@typescript-eslint/eslint-plugin": "^4.25.0",
+    "@typescript-eslint/parser": "^4.25.0",
+    "esbuild": "^0.12.3",
+    "eslint": "^7.27.0",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-jsdoc": "^35.0.0",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "mkdirp": "^1.0.4",
+    "rimraf": "^3.0.2",
+    "tar-js": "^0.3.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2",
+    "zotero-plugin": "^1.0.52"
+  },
+  "xpi": {
+    "name": "Debug Log for Zotero",
+    "updateLink": "https://github.com/retorquere/zotero-debug-log/releases/download/v{version}/zotero-debug-log-{version}.xpi",
+    "releaseURL": "https://github.com/retorquere/zotero-debug-log/releases/download/release/"
+  }
+}
