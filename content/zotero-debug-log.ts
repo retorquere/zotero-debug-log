@@ -62,7 +62,7 @@ class DebugLog { // tslint:disable-line:variable-name
       formData.append('file', blob, `${Zotero.Utilities.generateObjectKey()}.tar`)
 
       const response = await this.post('https://file.io', formData)
-      this.alert('Debug log ID', response.key)
+      this.alert('Debug log ID', `${response.key}-${key}`)
     }
     catch (err) {
       this.alert('Debug log submission error', err.message)
