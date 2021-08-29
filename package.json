@@ -1,6 +1,6 @@
 {
   "name": "zotero-debug-log",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Post a Zotero debug log",
   "scripts": {
     "lint": "eslint . --ext .ts --cache --cache-location .eslintcache/",
