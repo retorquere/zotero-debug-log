@@ -1,7 +1,7 @@
 declare const Zotero: any
 declare const Components: any
 
-import Tar from 'tar-js'
+import Zip from 'jszip'
 const monkey_patch_marker = 'DebugLogMonkeyPatched'
 
 type FileIO = {
@@ -44,7 +44,7 @@ class DebugLog { // tslint:disable-line:variable-name
     await Zotero.Schema.schemaUpdatePromise
 
     try {
-      const tape = new Tar()
+      const zip = new Zip()
       const key = Zotero.Utilities.generateObjectKey()
 
       const log = [
@@ -52,14 +52,20 @@ class DebugLog { // tslint:disable-line:variable-name
         Zotero.getErrors(true).join('\n\n'),
         Zotero.Debug.getConsoleViewerOutput().slice(-250000).join('\n'), // eslint-disable-line @typescript-eslint/no-magic-numbers
       ].filter((txt: string) => txt).join('\n\n').trim()
-      if (log) tape.append(`${key}/${key}.txt`, log)
+      zip.file(`${key}/${key}.txt`, log)
 
       const rdf = await this.rdf()
-      if (rdf) tape.append(`${key}/${key}.rdf`, rdf)
+      if (rdf) zip.file(`${key}/${key}.rdf`, rdf)
 
-      const blob = new Blob([tape.out], { type: 'application/x-tar'})
+      const zipped = await zip.generateAsync({
+        type: 'uint8array',
+        compression: 'DEFLATE',
+        compressionOptions: { level: 9 },
+      })
+
+      const blob = new Blob([zipped], { type: 'application/zip'})
       const formData = new FormData()
-      formData.append('file', blob, `${Zotero.Utilities.generateObjectKey()}.tar`)
+      formData.append('file', blob, `${Zotero.Utilities.generateObjectKey()}.zip`)
 
       const response = await this.post('https://file.io', formData)
       this.alert('Debug log ID', `${response.key}-${key}`)
