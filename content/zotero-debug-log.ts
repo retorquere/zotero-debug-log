@@ -71,7 +71,7 @@ class DebugLog { // tslint:disable-line:variable-name
       this.alert('Debug log ID', `${response.key}-${key}`)
     }
     catch (err) {
-      this.alert('Debug log submission error', err.message)
+      this.alert('Debug log submission error', `${err}`)
     }
   }
 
