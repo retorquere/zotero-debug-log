@@ -21,15 +21,21 @@ function debug(msg) {
   Zotero.debug(`debug-log: ${msg}`)
 }
 
+const MB = 1024 * 1024 // eslint-disable-line @typescript-eslint/no-magic-numbers
+
 class DebugLog { // tslint:disable-line:variable-name
   private initialized = false
   private strings: any
+  private memory = Components.classes['@mozilla.org/memory-reporter-manager;1'].getService(Components.interfaces.nsIMemoryReporterManager)
 
   public async load() {
     if (this.initialized) return
 
     await Zotero.Schema.schemaUpdatePromise
     this.initialized = true
+
+    this.memory.init()
+    setInterval(() => debug(`Zotero memory use: ${this.memory.resident / MB}`), 10000) // eslint-disable-line @typescript-eslint/no-magic-numbers
 
     this.strings = document.getElementById('zotero-debug-log-strings')
     debug('started')
