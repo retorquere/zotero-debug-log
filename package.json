@@ -7,7 +7,8 @@
     "build": "parallel --ungroup ::: 'npm run lint' 'node esbuild.js' 'tsc --noEmit'",
     "postbuild": "zotero-plugin-zipup build zotero-debug-log",
     "release": "zotero-plugin-release",
-    "postversion": "git push --follow-tags"
+    "postversion": "git push --follow-tags",
+    "start": "zotero-start"
   },
   "repository": {
     "type": "git",
@@ -22,20 +23,20 @@
   },
   "homepage": "https://github.com/retorquere/zotero-debug-log",
   "dependencies": {
-    "@types/mocha": "^9.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.29.3",
-    "@typescript-eslint/parser": "^4.29.3",
-    "esbuild": "^0.12.24",
-    "eslint": "^7.32.0",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-jsdoc": "^36.0.8",
+    "@types/mocha": "^9.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
+    "@typescript-eslint/parser": "^5.11.0",
+    "esbuild": "^0.14.21",
+    "eslint": "^8.9.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsdoc": "^37.9.1",
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "jszip": "^3.7.1",
     "mkdirp": "^1.0.4",
     "rimraf": "^3.0.2",
-    "ts-node": "^10.2.1",
-    "typescript": "^4.4.2",
-    "zotero-plugin": "^1.0.59"
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5",
+    "zotero-plugin": "^1.1.7"
   },
   "xpi": {
     "name": "Debug Log for Zotero",
