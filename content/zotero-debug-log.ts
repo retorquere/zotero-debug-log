@@ -10,6 +10,7 @@ class DebugLog {
 
   public load(): void {
     DebugLogSender.register('Debug Log', [])
+    Zotero.Prefs.set('debug.store', true)
 
     this.memory.init()
     setInterval(() => { Zotero.debug(`Zotero memory use: ${this.memory.resident / MB}`) }, 10000) // eslint-disable-line @typescript-eslint/no-magic-numbers
