@@ -1,14 +1,14 @@
 {
-  "name": "zotero-debug-log",
-  "version": "2.0.12",
-  "description": "Post a Zotero debug log",
+  "name": "debug-log",
+  "version": "0.0.1",
+  "description": "Debug Log for Zotero",
   "scripts": {
     "lint": "eslint . --ext .ts --cache --cache-location .eslintcache/",
-    "build": "parallel --ungroup ::: 'npm run lint' 'node esbuild.js' 'tsc --noEmit'",
-    "postbuild": "zotero-plugin-zipup build zotero-debug-log",
+    "prebuild": "npm run lint",
+    "build": "tsc --noEmit && node esbuild.js",
+    "postbuild": "zotero-plugin-zipup build debug-log",
     "release": "zotero-plugin-release",
-    "postversion": "git push --follow-tags",
-    "start": "zotero-start"
+    "postversion": "git push --follow-tags"
   },
   "repository": {
     "type": "git",
@@ -23,24 +23,25 @@
   },
   "homepage": "https://github.com/retorquere/zotero-debug-log",
   "dependencies": {
-    "@types/mocha": "^10.0.1",
-    "@typescript-eslint/eslint-plugin": "^5.55.0",
-    "@typescript-eslint/parser": "^5.55.0",
-    "esbuild": "^0.17.11",
-    "eslint": "^8.36.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "esbuild": "^0.18.12",
+    "eslint": "^8.44.0",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsdoc": "^40.0.2",
+    "eslint-plugin-jsdoc": "^46.4.3",
     "eslint-plugin-prefer-arrow": "^1.2.3",
-    "jszip": "^3.10.1",
-    "mkdirp": "^2.1.5",
-    "rimraf": "^4.4.0",
+    "mkdirp": "^3.0.1",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.5",
-    "zotero-plugin": "^1.4.16"
+    "typescript": "^5.1.6",
+    "zotero-plugin": "^1.4.25",
+    "zotero-types": "^1.0.16"
   },
   "xpi": {
-    "name": "Debug Log for Zotero",
-    "updateLink": "https://github.com/retorquere/zotero-debug-log/releases/download/v{version}/zotero-debug-log-{version}.xpi",
-    "releaseURL": "https://github.com/retorquere/zotero-debug-log/releases/download/release/"
+    "name": "Debug Log for Zotero for Zotero",
+    "updateLink": "https://github.com/retorquere/zotero-debug-log/releases/download/v{version}/debug-log-{version}.xpi",
+    "releaseURL": "https://github.com/retorquere/zotero-debug-log/releases/download/release/",
+    "bootstrapped": true
   }
 }

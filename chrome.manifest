@@ -1,5 +1,0 @@
-content	zotero-debug-log				content/
-locale	zotero-debug-log	en-US		locale/en-US/
-skin	zotero-debug-log	default		skin/
-
-overlay	chrome://zotero/content/zoteroPane.xul	chrome://zotero-debug-log/content/zotero-debug-log.xul

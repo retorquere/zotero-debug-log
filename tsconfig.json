@@ -16,11 +16,7 @@
       "./node_modules/@types"
     ]
   },
-  "include": [
-    "content/**/*",
-    "resource/**/*",
-    "*.ts"
-  ],
+  "include": [ "*.ts", "chrome/content", "typing", "node_modules/zotero-types" ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts",
