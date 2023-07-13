@@ -65,11 +65,6 @@ async function build() {
     outdir: 'build',
     banner: { js: 'var Zotero;\n' },
   })
-
-  await bundle({
-    entryPoints: [ 'lib.ts' ],
-    outdir: 'build',
-  })
 }
 
 build().catch(err => {
