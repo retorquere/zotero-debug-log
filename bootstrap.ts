@@ -74,7 +74,13 @@ export function install() {
 
 export async function startup({ id, version, resourceURI, rootURI = resourceURI.spec }) {
   await waitForZotero()
-  DebugLogSender.register('Debug Log', [])
+  log('registering')
+  try {
+    DebugLogSender.register('Debug Log', [])
+  }
+  catch (err) {
+    log(`registering failed ${err}`)
+  }
 }
 
 export function shutdown() {
