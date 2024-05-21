@@ -1,6 +1,6 @@
 /* eslint-disable prefer-arrow/prefer-arrow-functions, no-var, @typescript-eslint/no-unused-vars, no-caller, @typescript-eslint/explicit-module-boundary-types */
 
-import { DebugLog as DebugLogSender } from 'zotero-plugin/debug-log'
+import { DebugLog } from 'zotero-plugin/debug-log'
 
 declare const dump: (msg: string) => void
 declare const Components: any
@@ -76,7 +76,7 @@ export async function startup({ id, version, resourceURI, rootURI = resourceURI.
   await waitForZotero()
   log('registering')
   try {
-    DebugLogSender.register('Debug Log', [])
+    DebugLog.register('Debug Log')
   }
   catch (err) {
     log(`registering failed ${err}`)
@@ -84,7 +84,7 @@ export async function startup({ id, version, resourceURI, rootURI = resourceURI.
 }
 
 export function shutdown() {
-  // nothing to do
+  DebugLog.unregister('Debug Log')
 }
 
 export function uninstall() {
