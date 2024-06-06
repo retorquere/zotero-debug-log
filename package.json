@@ -36,7 +36,7 @@
     "rimraf": "^5.0.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
-    "zotero-plugin": "^2.0.16",
+    "zotero-plugin": "^2.0.17",
     "zotero-types": "^2.0.0"
   },
   "xpi": {
