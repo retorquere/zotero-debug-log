@@ -114,8 +114,8 @@ export async function startup({ id, version, resourceURI, rootURI = resourceURI.
     else {
       log(`logging to ${path}`)
       const start = new Date
-      const logid = new Date(start.getTime() - start.getTimezoneOffset() * 60000).toISOString().replace('Z', '').replace(/:/g, '.')
-      logwriter = writer(dir, `${logid}.txt`)
+      const logname = `zotero-${new Date(start.getTime() - start.getTimezoneOffset() * 60000).toISOString().replace('Z', '').replace(/:/g, '.')}.txt`
+      logwriter = writer(dir, logname)
       // Zotero.Debug.addConsoleViewerListener(logwriter)
       Zotero.Debug.addListener(logwriter)
     }
