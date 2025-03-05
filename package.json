@@ -9,7 +9,8 @@
     "build": "tsc --noEmit && node esbuild.js",
     "postbuild": "zotero-plugin-zipup build debug-log",
     "release": "zotero-plugin-release",
-    "postversion": "git push --follow-tags"
+    "postversion": "git push --follow-tags",
+    "start": "zotero-start"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,7 @@
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^8.7.0",
     "@typescript-eslint/parser": "^8.7.0",
-    "esbuild": "^0.24.0",
+    "esbuild": "^0.25.0",
     "eslint": "^8.47.0",
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-jsdoc": "^50.2.4",
@@ -35,9 +36,9 @@
     "npm-run-all": "^4.1.5",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.2",
-    "zotero-plugin": "^2.0.32",
-    "zotero-types": "^2.1.1"
+    "typescript": "^5.8.2",
+    "zotero-plugin": "^5.0.12",
+    "zotero-types": "^3.1.7"
   },
   "xpi": {
     "name": "Debug Log for Zotero",
