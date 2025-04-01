@@ -116,7 +116,6 @@ export async function startup({ id, version, resourceURI, rootURI = resourceURI.
       const start = new Date
       const logname = `zotero-${new Date(start.getTime() - start.getTimezoneOffset() * 60000).toISOString().replace('Z', '').replace(/:/g, '.')}.txt`
       logwriter = writer(dir, logname)
-      // Zotero.Debug.addConsoleViewerListener(logwriter)
       Zotero.Debug.addListener(logwriter)
     }
   }
@@ -134,7 +133,6 @@ export function shutdown() {
   DebugLog.unregister('Debug Log')
   if (logwriter) {
     Zotero.Debug.removeListener(logwriter)
-    Zotero.Debug.removeConsoleViewerListener(logwriter)
     logwriter = null
   }
 }
