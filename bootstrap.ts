@@ -13,59 +13,8 @@ const {
   Constructor: Cc,
 } = Components
 
-if (typeof Zotero == 'undefined') {
-  var Zotero
-}
-
 function log(msg) {
   Zotero.debug(`Debug Log for Zotero: ${msg}`)
-}
-
-// In Zotero 6, bootstrap methods are called before Zotero is initialized, and using include.js
-// to get the Zotero XPCOM service would risk breaking Zotero startup. Instead, wait for the main
-// Zotero window to open and get the Zotero object from there.
-//
-// In Zotero 7, bootstrap methods are not called until Zotero is initialized, and the 'Zotero' is
-// automatically made available.
-async function waitForZotero() {
-  if (typeof Zotero != 'undefined') {
-    await Zotero.initializationPromise
-    return
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  var { Services } = ChromeUtils.import('resource://gre/modules/Services.jsm')
-  var windows = Services.wm.getEnumerator('navigator:browser')
-  var found = false
-  while (windows.hasMoreElements()) {
-    const win = windows.getNext()
-    if (win.Zotero) {
-      Zotero = win.Zotero
-      found = true
-      break
-    }
-  }
-  if (!found) {
-    await new Promise(resolve => {
-      var listener = {
-        onOpenWindow(aWindow) {
-          // Wait for the window to finish loading
-          const domWindow = aWindow.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-            .getInterface(Components.interfaces.nsIDOMWindowInternal || Components.interfaces.nsIDOMWindow)
-          domWindow.addEventListener('load', function() {
-            domWindow.removeEventListener('load', arguments.callee, false)
-            if (domWindow.Zotero) {
-              Services.wm.removeListener(listener)
-              Zotero = domWindow.Zotero
-              resolve(undefined)
-            }
-          }, false)
-        },
-      }
-      Services.wm.addListener(listener)
-    })
-  }
-  await Zotero.initializationPromise
 }
 
 export function install() {
@@ -93,11 +42,9 @@ function writer(dir: any, name: string): ((m: string) => void) {
 
 let logwriter: ReturnType<typeof writer>
 
-export async function startup({ id, version, resourceURI, rootURI = resourceURI.spec }) {
-  await waitForZotero()
-
+export function startup({ id, version, resourceURI, rootURI = resourceURI.spec }) {
   const env = Components.classes['@mozilla.org/process/environment;1'].getService(Components.interfaces.nsIEnvironment)
-  let path = env.get('ZOTERO_DEBUG_LOG')
+  let path: string = env.get('ZOTERO_DEBUG_LOG') || ''
   log(`log enabled? ${!!path}`)
 
   if (path === '.') {

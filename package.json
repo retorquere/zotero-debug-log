@@ -38,13 +38,15 @@
     "rimraf": "^6.1.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "zotero-plugin": "^8.0.10",
+    "zotero-plugin": "^8.0.14",
     "zotero-types": "^4.1.1"
   },
   "xpi": {
     "name": "Debug Log for Zotero",
     "updateLink": "https://github.com/retorquere/zotero-debug-log/releases/download/v{version}/debug-log-{version}.xpi",
     "releaseURL": "https://github.com/retorquere/zotero-debug-log/releases/download/release/",
-    "bootstrapped": true
+    "bootstrapped": true,
+    "minVersion": "7.0.32",
+    "maxVersion": "9.*"
   }
 }
