@@ -46,7 +46,7 @@
     "updateLink": "https://github.com/retorquere/zotero-debug-log/releases/download/v{version}/debug-log-{version}.xpi",
     "releaseURL": "https://github.com/retorquere/zotero-debug-log/releases/download/release/",
     "bootstrapped": true,
-    "minVersion": "7.0.32",
+    "minVersion": "8.0.1",
     "maxVersion": "9.*"
   }
 }
