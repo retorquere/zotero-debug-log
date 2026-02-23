@@ -9,7 +9,7 @@
     "prebuild": "npm run lint",
     "build": "tsc --noEmit && node esbuild.js",
     "postbuild": "zp-zipup build debug-log",
-    "release": "zotero-plugin-release",
+    "release": "zp-release",
     "postversion": "git push --follow-tags",
     "start": "zotero-start"
   },
